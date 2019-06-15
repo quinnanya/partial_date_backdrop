@@ -730,7 +730,7 @@ function _partial_date_field_widget_settings_form($field, $instance) {
     '#type' => 'select',
     '#title' => t('Minute increments'),
     '#default_value' => empty($settings['increments']['minute']) ? 1 : $settings['increments']['minute'],
-    '#options' => drupal_map_assoc(array(1, 2, 5, 10, 15, 30)),
+    '#options' => backdrop_map_assoc(array(1, 2, 5, 10, 15, 30)),
     '#required' => TRUE,
     '#weight' => -7,
   );
@@ -738,7 +738,7 @@ function _partial_date_field_widget_settings_form($field, $instance) {
     '#type' => 'select',
     '#title' => t('Second increments'),
     '#default_value' => empty($settings['increments']['second']) ? 1 : $settings['increments']['second'],
-    '#options' => drupal_map_assoc(array(1, 2, 5, 10, 15, 30)),
+    '#options' => backdrop_map_assoc(array(1, 2, 5, 10, 15, 30)),
     '#required' => TRUE,
     '#weight' => -7,
   );

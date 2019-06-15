@@ -26,7 +26,7 @@ function partial_date_menu() {
     if (!$counter) {
       $items['admin/config/regional/date-time/partial-date-formats'] = array(
         'title' => t('Partial date formats'),
-        'page callback' => 'drupal_get_form',
+        'page callback' => 'backdrop_get_form',
         'page arguments' => array('partial_date_format_settings_form', $type),
         'access arguments' => array('administer site configuration'),
         'type' => MENU_LOCAL_TASK,
@@ -41,7 +41,7 @@ function partial_date_menu() {
     else {
       $items['admin/config/regional/date-time/partial-date-formats/' . $type] = array(
         'title' => $label,
-        'page callback' => 'drupal_get_form',
+        'page callback' => 'backdrop_get_form',
         'page arguments' => array('partial_date_format_settings_form', $type),
         'access arguments' => array('administer site configuration'),
         'type' => $counter ? MENU_LOCAL_TASK : MENU_DEFAULT_LOCAL_TASK,
@@ -277,8 +277,8 @@ function partial_date_field_widget_info() {
           'range_inline' => 0,
         ),
         'granularity' => array(
-          'from' => drupal_map_assoc(array_keys(partial_date_components())),
-          'to' => drupal_map_assoc(array_keys(partial_date_components())),
+          'from' => backdrop_map_assoc(array_keys(partial_date_components())),
+          'to' => backdrop_map_assoc(array_keys(partial_date_components())),
         ),
         'estimates' => array(
           'from' => array_combine(array_keys(partial_date_components(array('timezone'))), array_fill(0, 6, '')),
@@ -569,7 +569,7 @@ function partial_date_render($item, $settings = array()) {
 }
 
 function partial_date_format_types($add_custom = FALSE) {
-  $formats = &drupal_static(__FUNCTION__);
+  $formats = &backdrop_static(__FUNCTION__);
   if (!$formats) {
     $formats = variable_get('partial_date_format_types', array(
       'short' => t('Short', array(), array('context' => 'datetime')),
@@ -587,7 +587,7 @@ function partial_date_format_types($add_custom = FALSE) {
 }
 
 function partial_date_format_settings($type) {
-  $settings = &drupal_static(__FUNCTION__, array());
+  $settings = &backdrop_static(__FUNCTION__, array());
   if (!isset($settings[$type])) {
     $settings[$type] = variable_get('partial_date_format_' . $type, partial_date_format_default_options($type));
   }
@@ -773,7 +773,7 @@ function partial_date_theme() {
  */
 function theme_partial_date_element($variables) {
   $element = $variables['element'];
-  return '<div class="partial-date-element clearfix">' . drupal_render_children($element) . '</div>';
+  return '<div class="partial-date-element clearfix">' . backdrop_render_children($element) . '</div>';
 }
 
 function theme_partial_date_range($variables) {
@@ -889,7 +889,7 @@ function partial_date_element_process($element) {
 function partial_date_views_api() {
   return array(
     'api' => 3,
-    'path' => drupal_get_path('module', 'partial_date') . '/includes',
+    'path' => backdrop_get_path('module', 'partial_date') . '/includes',
   );
 }
 
@@ -1049,7 +1049,7 @@ function partial_date_timezone_handling_correlation($timezone = '', $tz_handling
         return $user->timezone;
       }
       else {
-        return variable_get('user_default_timezone', DRUPAL_USER_TIMEZONE_DEFAULT) ? '' : variable_get('date_default_timezone', '');
+        return variable_get('user_default_timezone', backdrop_USER_TIMEZONE_DEFAULT) ? '' : variable_get('date_default_timezone', '');
       }
 
     case 'date':
@@ -1087,13 +1087,13 @@ function partial_date_granularity_field_options($type, $options = array(), $incr
       return $options + date_minutes('i', FALSE, $increment);
 
     case 'hour':
-      return $options + drupal_map_assoc(range(0, 23));
+      return $options + backdrop_map_assoc(range(0, 23));
 
     case 'day':
-      return $options + drupal_map_assoc(range(1, 31));
+      return $options + backdrop_map_assoc(range(1, 31));
 
     case 'month':
-      return $options + drupal_map_assoc(range(1, 12), 'map_month');
+      return $options + backdrop_map_assoc(range(1, 12), 'map_month');
 
     case 'timezone':
       // Ref: Date API module
@@ -1164,8 +1164,8 @@ function partial_date_month_names($month) {
  */
 function partial_date_weekday_name_abbreviations($week_day_number, $length = 3) {
   $name = partial_date_weekday_names($week_day_number);
-  if (drupal_strlen($name) > $length) {
-    return drupal_substr($name, 0, $length);
+  if (backdrop_strlen($name) > $length) {
+    return backdrop_substr($name, 0, $length);
   }
   return $name;
 }

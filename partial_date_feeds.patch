@@ -143,7 +143,7 @@ diff -rupN --exclude=.DS_Store partial_date/partial_date.info agile_partial_date
 +; Feeds
 +files[] = mappings/partial_date.inc
  
- ; Information added by drupal.org packaging script on 2012-07-18
+ ; Information added by backdrop.org packaging script on 2012-07-18
  version = "7.x-1.0-beta1"
  core = "7.x"
  project = "partial_date"

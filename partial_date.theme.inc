@@ -39,7 +39,7 @@ function theme_partial_date_inline_form_element($variables) {
   if ($css = variable_get('partial_date_component_field_inline_range_styles', _partial_date_inline_float_css())) {
     $attributes['style'] = $css;
   }
-  $output = '<div' . drupal_attributes($attributes) . '>' . "\n";
+  $output = '<div' . backdrop_attributes($attributes) . '>' . "\n";
 
   // If #title is not set, we don't display any label or required marker.
   if (!isset($element['#title'])) {
@@ -81,9 +81,9 @@ function theme_partial_date_range_inline_element($variables) {
   $output = '<div class="clearfix partial-date-inline-range">';
   if (isset($element['from']) && isset($element['to'])) {
     $output .= '<div class="clearfix">';
-    $output .= drupal_render($element['from']);
-    $output .= drupal_render($element['_separator']);
-    $output .= drupal_render($element['to']);
+    $output .= backdrop_render($element['from']);
+    $output .= backdrop_render($element['_separator']);
+    $output .= backdrop_render($element['to']);
     $output .= '</div>';
     if (!empty($element['#component_help'])) {
       $output .= '<div class="description">' . $element['#component_help'] . '</div>';
@@ -91,7 +91,7 @@ function theme_partial_date_range_inline_element($variables) {
 
 
   }
-  $output .= drupal_render_children($element);
+  $output .= backdrop_render_children($element);
   $output .= '</div>';
   return $output;
 }

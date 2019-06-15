@@ -31,7 +31,7 @@ function _partial_date_field_formatter_settings_form($field, $instance, $view_mo
     '#options' => partial_date_format_types(TRUE),
     '#id' => 'partial-date-format-selector',
     '#attached' => array(
-      'js' => array(drupal_get_path('module', 'partial_date') . '/partial-date-admin.js'),
+      'js' => array(backdrop_get_path('module', 'partial_date') . '/partial-date-admin.js'),
     ),
     '#description' => t('You can use any of the predefined partial date formats, (!configure), or define the custom settings for this display by choosing %custom.',
         array('%custom' => t('Custom'), '!configure' => l(t('configure'), 'admin/config/regional/date-time/partial-date-formats', array('attributes' => array('target' => '_blank'))))),
@@ -180,10 +180,10 @@ function partial_date_type_format_elements($settings, $field = NULL, $instance =
 function partial_date_format_settings_form($form, $form_state, $type, $settings = array()) {
   $types = partial_date_format_types();
   if (!isset($types[$type])) {
-    drupal_access_denied();
+    backdrop_access_denied();
   }
 
-  drupal_set_title(t('Edit partial date format %format', array('%format' => $types[$type])), PASS_THROUGH);
+  backdrop_set_title(t('Edit partial date format %format', array('%format' => $types[$type])), PASS_THROUGH);
 
   $settings += partial_date_format_settings($type);
   $form['partial_date_format_' . $type] = partial_date_type_format_elements($settings);
@@ -199,15 +199,15 @@ function theme_partial_date_format_settings_form($variables) {
 
     $form[$key]['weight']['#attributes']['class'] = array('partial-date-format-order-weight');
     $row = array();
-    $row[] = drupal_render($form[$key]['label']);
+    $row[] = backdrop_render($form[$key]['label']);
     if (in_array($key, array('c1', 'c2', 'c3', 'approx'))) {
-      $row[] = array('data' => drupal_render($form[$key]['value']), 'colspan' => 2);
+      $row[] = array('data' => backdrop_render($form[$key]['value']), 'colspan' => 2);
     }
     else {
-      $row[] = drupal_render($form[$key]['format']);
-      $row[] = drupal_render($form[$key]['empty']);
+      $row[] = backdrop_render($form[$key]['format']);
+      $row[] = backdrop_render($form[$key]['empty']);
     }
-    $row[] = drupal_render($form[$key]['weight']);
+    $row[] = backdrop_render($form[$key]['weight']);
 
     $rows[] = array(
       'data' => $row,
@@ -223,7 +223,7 @@ function theme_partial_date_format_settings_form($variables) {
     t('Weight'),
   );
 
-  drupal_add_tabledrag('partial-date-format-order', 'order', 'sibling', 'partial-date-format-order-weight');
+  backdrop_add_tabledrag('partial-date-format-order', 'order', 'sibling', 'partial-date-format-order-weight');
   return theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('id' => 'partial-date-format-order')));
 }
 

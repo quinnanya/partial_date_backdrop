@@ -1,6 +1,6 @@
 (function ($) {
 
-Drupal.togglePartialDateCustomSettings = function (val) {
+backdrop.togglePartialDateCustomSettings = function (val) {
   if (val == 'custom') {
     $('#partial-date-custom-component-settings').show();
   }
@@ -9,12 +9,12 @@ Drupal.togglePartialDateCustomSettings = function (val) {
   }
 }
 
-Drupal.behaviors.partialDateCustomFormatToogle = {
+backdrop.behaviors.partialDateCustomFormatToogle = {
   attach: function (context, settings) {
     $('#partial-date-format-selector', context).each(function () {
-      Drupal.togglePartialDateCustomSettings($(this).val());
+      backdrop.togglePartialDateCustomSettings($(this).val());
     }).change(function () {
-      Drupal.togglePartialDateCustomSettings($(this).val());
+      backdrop.togglePartialDateCustomSettings($(this).val());
     });
   }
 }

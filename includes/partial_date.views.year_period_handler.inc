@@ -142,7 +142,7 @@ class views_handler_filter_field_partial_date_year extends views_handler_filter_
         $which = in_array($this->operator, $this->operator_values(2)) ? 'minmax' : 'value';
       }
       else {
-        $source = 'edit-' . drupal_html_id($this->options['expose']['operator_id']);
+        $source = 'edit-' . backdrop_html_id($this->options['expose']['operator_id']);
       }
     }
 
